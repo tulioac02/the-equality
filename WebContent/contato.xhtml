@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="pageTitle">
+        Página de Contato
+    </ui:define>
+
+	<ui:define name="titulo">
+		<!-- <p:outputPanel>Página de Contato</p:outputPanel> -->
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="contato">
+			<p:fieldset legend="Contato">
+				<h:panelGrid columns="2">
+
+					<p:outputLabel value=" E-mail:" styleClass="pi pi-envelope" />
+					<h:outputLink value="mailto:contato@contato.com">contato@contato.com</h:outputLink>
+
+					<p:outputLabel value=" Whatsapp:" styleClass="pi pi-whatsapp" />
+					<h:outputLink
+						value="https://api.whatsapp.com/send?phone=NUMERO_TELEFONE">WhatsApp</h:outputLink>
+
+					<p:outputLabel value=" Instagram:" styleClass="pi pi-instagram" />
+					<h:outputLink value="https://www.instagram.com/seu_usuario/">Instagram</h:outputLink>
+
+
+					<p:outputLabel value=" Facebook:" styleClass="pi pi-facebook" />
+					<h:outputLink value="https://www.facebook.com/seu_usuario/">Facebook</h:outputLink>
+
+				</h:panelGrid>
+
+			</p:fieldset>
+			<br />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

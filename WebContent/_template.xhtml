@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<title><ui:insert name="pageTitle">Default Title</ui:insert></title>
+</h:head>
+<h:body>
+	<div id="cabecalho">
+		<!-- Redirect to index.xhtml on logo click -->
+
+		<h:form id="growlForm">
+			<p:growl id="messages" showDetail="true" autoUpdate="true" />
+
+		</h:form>
+
+		<!-- Caso a tela não seja login -->
+		<h:form rendered="#{facesContext.viewRoot.viewId != '/login.xhtml'}">
+			<p:menubar style="font-size: 1rem">
+				<p:menuitem value="Entrar" icon="pi pi-sign-in	"
+					rendered="#{usuarioLogado == null}" outcome="/login.xhtml" />
+				<p:submenu label="Usuário" rendered="#{usuarioLogado != null}"
+					icon="pi pi-user">
+					<p:menuitem value="#{usuarioLogado.email}" outcome="perfil" />
+					<p:menuitem value="Sair" icon="pi pi-sign-out"
+						action="#{loginBean.deslogar}" update=":growlForm:messages" />
+				</p:submenu>
+				<p:menuitem value="Início" outcome="index" icon="pi pi-home" />
+				<p:menuitem value="Notícias" outcome="noticia" icon="pi pi-book" />
+				<p:menuitem value="Fotos" outcome="foto" icon="pi pi-camera" />
+				<p:menuitem value="Sobre" outcome="sobre" icon="pi pi-info-circle" />
+				<p:menuitem value="Contato" outcome="contato" icon="pi pi-phone" />
+				<p:menuitem value="Clubes" outcome="clubes" icon="pi pi-users" />
+				<p:menuitem value="Temporadas" outcome="temporadas"
+					icon="pi pi-calendar" />
+				<p:menuitem value="Simulador" outcome="simulador"
+					icon="pi pi-calendar-plus" />
+				<!-- Caso esteja logado -->
+				<p:submenu label="Configurar" icon="pi pi-cog"
+					rendered="#{usuarioLogado != null}">
+					<p:menuitem value="Usuário" outcome="usuario" icon="pi pi-user" />
+					<p:separator />
+					<p:menuitem value="Clube" outcome="clube" icon="pi pi-users" />
+					<p:separator />
+					<p:menuitem value="Temporada" outcome="temporada"
+						icon="pi pi-calendar" />
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+
+		<h1>
+			<ui:insert name="titulo"></ui:insert>
+		</h1>
+	</div>
+
+	<div id="conteudo">
+		<ui:insert name="conteudo"></ui:insert>
+	</div>
+
+	<div id="rodape">
+		<br /> Copyright 2024
+		<ui:insert name="texto"></ui:insert>
+	</div>
+</h:body>
+</html>

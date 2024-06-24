@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="pageTitle">
+        Página de Temporada
+    </ui:define>
+
+	<ui:define name="titulo">
+		<!-- <p:outputPanel>Página de Temporada</p:outputPanel> -->
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formTabelaTemporadas">
+
+			<p:fieldset>
+				<p:dataTable value="#{temporadasBean.temporadas}" var="temporada"
+					id="tabelaTemporadas" paginator="true" rows="20">
+
+					<f:facet name="header">Temporadas</f:facet>
+
+					<p:column headerText="Temporada" sortBy="#{temporada.temporada}"
+						filterBy="#{temporada.temporada}" filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.temporada}" />
+					</p:column>
+
+					<p:column headerText="Clube" sortBy="#{temporada.clube.nome}"
+						filterBy="#{temporada.clube.nome}" filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.clube.nome}" />
+					</p:column>
+
+					<p:column headerText="Categoria"
+						sortBy="#{temporada.clube.categoria}"
+						filterBy="#{temporada.clube.categoria}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.clube.categoria}" />
+					</p:column>
+
+					<p:column headerText="Divisão Nacional"
+						sortBy="#{temporada.divisaoNacional}"
+						filterBy="#{temporada.divisaoNacional}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.divisaoNacional}" />
+					</p:column>
+
+					<p:column headerText="Duração (em Dias)"
+						sortBy="#{temporada.duracaoPeriodoDeAtividades}"
+						filterBy="#{temporada.duracaoPeriodoDeAtividades}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.duracaoPeriodoDeAtividades}" />
+					</p:column>
+
+					<p:column headerText="Intervalo Anterior (em Dias)"
+						sortBy="#{temporada.intervaloPeriodoDeAtividades}"
+						filterBy="#{temporada.intervaloPeriodoDeAtividades}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.intervaloPeriodoDeAtividades}" />
+					</p:column>
+
+					<p:column headerText="Número Total de Jogos"
+						sortBy="#{temporada.numeroTotaldeJogos}"
+						filterBy="#{temporada.numeroTotaldeJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.numeroTotaldeJogos}" />
+					</p:column>
+
+					<p:column headerText="Intervalo Bruto entre Jogos"
+						sortBy="#{temporada.intervaloBrutoEntreJogos}"
+						filterBy="#{temporada.intervaloBrutoEntreJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.intervaloBrutoEntreJogos}" />
+					</p:column>
+
+					<p:column headerText="Intervalo Líquido entre Jogos"
+						sortBy="#{temporada.intervaloLiquidoEntreJogos}"
+						filterBy="#{temporada.intervaloLiquidoEntreJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.intervaloLiquidoEntreJogos}" />
+					</p:column>
+
+					<p:column headerText="Simular" style="text-align: center;">
+						<p:commandLink
+							action="#{temporadasBean.redirecionarParaSimulador}"
+							onclick="window.scrollTo(0, 0);">
+							<f:setPropertyActionListener
+								target="#{temporadasBean.temporadaSelecionada}"
+								value="#{temporada}" />
+							<span class="pi-icon pi pi-calendar-plus" style="margin: 0 auto;" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

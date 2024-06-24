@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="pageTitle">
+        Página de Clube
+    </ui:define>
+
+	<ui:define name="titulo">
+		<!-- <p:outputPanel>Página de Clube</p:outputPanel> -->
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="formTabelaClubes">
+			<p:fieldset>
+				<p:dataTable value="#{clubesBean.clubes}" var="clube"
+					id="tabelaClubes">
+
+					<f:facet name="header">Clubes</f:facet>
+
+					<p:column headerText="Nome" sortBy="#{clube.nome}"
+						filterBy="#{clube.nome}" filterMatchMode="startsWith">
+						<h:outputText value="#{clube.nome}" />
+					</p:column>
+
+					<p:column headerText="Localização" sortBy="#{clube.localizacao}"
+						filterBy="#{clube.localizacao}" filterMatchMode="startsWith">
+						<h:outputText value="#{clube.localizacao}" />
+					</p:column>
+
+					<p:column headerText="Categoria" sortBy="#{clube.categoria}"
+						filterBy="#{clube.categoria}" filterMatchMode="startsWith">
+						<h:outputText value="#{clube.categoria}" />
+					</p:column>
+
+					<p:column
+						headerText="Média Duração do Período de Atividades (em dias)"
+						sortBy="#{clube.mediaDuracaoPeriodoDeAtividades}"
+						filterBy="#{clube.mediaDuracaoPeriodoDeAtividades}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{clube.mediaDuracaoPeriodoDeAtividades}" />
+					</p:column>
+
+					<p:column
+						headerText="Média Intervalo entre Períodos de Atividades (em dias)"
+						sortBy="#{clube.mediaIntervaloPeriodoDeAtividades}"
+						filterBy="#{clube.mediaIntervaloPeriodoDeAtividades}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{clube.mediaIntervaloPeriodoDeAtividades}" />
+					</p:column>
+
+					<p:column headerText="Média Número Total de Jogos"
+						sortBy="#{clube.mediaNumeroTotaldeJogos}"
+						filterBy="#{clube.mediaNumeroTotaldeJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{clube.mediaNumeroTotaldeJogos}" />
+					</p:column>
+
+					<p:column headerText="Média Intervalo Bruto entre Jogos (em dias)"
+						sortBy="#{clube.mediaIntervaloEntreJogosBruto}"
+						filterBy="#{clube.mediaIntervaloEntreJogosBruto}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{clube.mediaIntervaloEntreJogosBruto}" />
+					</p:column>
+
+					<p:column headerText="Média Intervalo Liquido entre Jogos"
+						sortBy="#{clube.mediaIntervaloEntreJogosLiquido}"
+						filterBy="#{clube.mediaIntervaloEntreJogosLiquido} (em dias)"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{clube.mediaIntervaloEntreJogosLiquido}" />
+					</p:column>
+
+
+					<p:column headerText="Número de Temporadas"
+						sortBy="#{clube.temporadas.size()}"
+						filterBy="#{clube.temporadas.size()}" filterMatchMode="startsWith">
+						<h:outputText value="#{clube.temporadas.size()}" />
+					</p:column>
+
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

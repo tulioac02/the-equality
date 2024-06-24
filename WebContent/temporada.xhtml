@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="temporadaId" value="#{temporadaBean.temporadaId}" />
+		<f:viewAction action="#{temporadaBean.carregarTemporadaPelaId}"
+			if="#{param.temporadaId != null}" />
+	</f:metadata>
+
+	<ui:define name="pageTitle">
+        Página de Configuração de Temporadas
+    </ui:define>
+
+	<ui:define name="titulo">
+		<!-- <p:outputPanel>Página de Temporada</p:outputPanel> -->
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formTemporada">
+
+			<p:fieldset legend="Cadastro de Temporada">
+				<p:fieldset legend="Dados Iniciais">
+					<p:panelGrid columns="3">
+
+						<p:outputLabel value="Clube:" for="clube" />
+
+						<p:selectOneMenu value="#{temporadaBean.clubeId}" id="clube"
+							required="true" requiredMessage="Clube obrigatório">
+							<f:selectItem itemLabel="Selecione um clube" itemValue="" />
+							<f:selectItems value="#{temporadaBean.clubes}" var="clube"
+								itemLabel="#{clube.nome}" itemValue="#{clube.id}" />
+						</p:selectOneMenu>
+
+						<p:message for="clube" id="messageClube" />
+
+						<p:outputLabel value="Temporada:" for="temporada" />
+
+						<p:inputText id="temporada"
+							value="#{temporadaBean.temporada.temporada}" required="true"
+							requiredMessage="Temporada obrigatória"
+							validatorMessage="Temporada não pode ter mais de 7 caracteres">
+							<f:validateLength maximum="7" />
+							<f:ajax event="blur" render="messageTemporada" />
+						</p:inputText>
+
+						<p:message for="temporada" id="messageTemporada" />
+
+						<p:outputLabel value="Data do Primeiro Jogo da Temporada Atual:" />
+
+						<p:calendar id="dataPrimeiroJogoAtual" required="true"
+							value="#{temporadaBean.temporada.dataPrimeiroJogoAtual}"
+							requiredMessage="Data do Primeiro Jogo da Temporada Atual é obrigatória"
+							converterMessage="Preenchimento incompleto da Data"
+							pattern="dd/MM/yyyy" mask="true"
+							validator="#{temporadaBean.validaDataPrimeiroJogoAtual}">
+							<f:ajax event="blur" render="messageDataPrimeiroJogoAtual" />
+						</p:calendar>
+
+						<p:message for="dataPrimeiroJogoAtual"
+							id="messageDataPrimeiroJogoAtual" />
+
+						<p:outputLabel value="Data do Último Jogo da Temporada Atual:" />
+
+						<p:calendar id="dataUltimoJogoAtual" required="true"
+							value="#{temporadaBean.temporada.dataUltimoJogoAtual}"
+							requiredMessage="Data do Último Jogo da Temporada Atual é obrigatória"
+							converterMessage="Preenchimento incompleto da Data"
+							pattern="dd/MM/yyyy" mask="true"
+							validator="#{temporadaBean.validaDataUltimoJogoAtual}">
+							<f:ajax event="blur" render="messageDataUltimoJogoAtual" />
+						</p:calendar>
+
+						<p:message for="dataUltimoJogoAtual"
+							id="messageDataUltimoJogoAtual" />
+
+						<p:outputLabel value="Data do Último Jogo da Temporada Anterior:" />
+
+						<p:calendar id="dataUltimoJogoAnterior" required="true"
+							value="#{temporadaBean.temporada.dataUltimoJogoAnterior}"
+							requiredMessage="Data do Último Jogo da Temporada Anterior é obrigatória"
+							converterMessage="Preenchimento incompleto da Data"
+							pattern="dd/MM/yyyy" mask="true"
+							validator="#{temporadaBean.validaDataUltimoJogoAnterior}">
+							<f:ajax event="blur" render="messageDataUltimoJogoAnterior" />
+						</p:calendar>
+
+						<p:message for="dataUltimoJogoAnterior"
+							id="messageDataUltimoJogoAnterior" />
+
+						<p:outputLabel value="Dias de Desconto" />
+
+						<p:inputNumber id="diasDeDesconto"
+							value="#{temporadaBean.temporada.diasDeDesconto}" type="int"
+							decimalPlaces="0" min="0" max="100"
+							validatorMessage="O valor deve estar entre 0 e 100"
+							required="true" requiredMessage="Dias de Desconto obrigatório">
+							<f:validateLongRange minimum="0" maximum="100" />
+							<f:ajax event="blur" render="messageDiasDeDesconto" />
+						</p:inputNumber>
+
+						<p:message for="diasDeDesconto" id="messageDiasDeDesconto" />
+
+						<p:outputLabel value="Divisão Nacional" />
+
+						<p:inputNumber id="divisaoNacional"
+							value="#{temporadaBean.temporada.divisaoNacional}" type="int"
+							decimalPlaces="0" min="1" max="10"
+							validatorMessage="O valor deve estar entre 1 e 10"
+							required="true" requiredMessage="Divisão nacional obrigatória">
+							<f:validateLongRange minimum="1" maximum="10" />
+							<f:ajax event="blur" render="messageDivisaoNacional" />
+						</p:inputNumber>
+
+						<p:message for="divisaoNacional" id="messageDivisaoNacional" />
+
+					</p:panelGrid>
+
+					<p:tooltip for="clube"
+						value="Selecione que será cadastrado a temporada" />
+					<p:tooltip for="temporada"
+						value="Insira o(s) ano(s) referente a temporada" />
+					<p:tooltip for="dataPrimeiroJogoAtual"
+						value="Insira a data do primeiro jogo da temporada atual" />
+					<p:tooltip for="dataUltimoJogoAtual"
+						value="Insira a data do ultimo jogo da temporada atual" />
+					<p:tooltip for="dataUltimoJogoAnterior"
+						value="Insira a data da último jogo da temporada anterior" />
+					<p:tooltip for="diasDeDesconto"
+						value="Insira o número de dias de desconto, tais como Datas FIFA e recessos durante a temporada" />
+					<p:tooltip for="divisaoNacional"
+						value="Insira a divisão do Sistema Nacional de Ligas da temporada" />
+				</p:fieldset>
+
+				<p:fieldset legend="Número de Jogos por Competições">
+					<p:panelGrid columns="6">
+
+						<p:outputLabel value="Copa Intercontinental:" />
+
+						<p:inputNumber id="jogosCopaIntercontinental" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosCopaIntercontinental}"
+							type="int" decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosCopaIntercontinental" />
+							<f:ajax event="blur" render="messageJogosCopaIntercontinental" />
+						</p:inputNumber>
+
+						<p:message for="jogosCopaIntercontinental"
+							id="messageJogosCopaIntercontinental" />
+
+						<p:outputLabel value="Copa Continental:" />
+
+						<p:inputNumber id="jogosCopaContinental" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosCopaContinental}"
+							type="int" decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosCopaContinental" />
+							<f:ajax event="blur" render="messageJogosCopaContinental" />
+						</p:inputNumber>
+
+						<p:message for="jogosCopaContinental"
+							id="messageJogosCopaContinental" />
+
+						<p:outputLabel value="Supercopa Continental:" />
+
+						<p:inputNumber id="jogosSupercopaContinental" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosSupercopaContinental}"
+							type="int" decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosSupercopaContinental" />
+							<f:ajax event="blur" render="messageJogosSupercopaContinental" />
+						</p:inputNumber>
+
+						<p:message for="jogosSupercopaContinental"
+							id="messageJogosSupercopaContinental" />
+
+						<p:outputLabel value="Campeonato Nacional:" />
+
+						<p:inputNumber id="jogosCampeonatoNacional" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosCampeonatoNacional}"
+							type="int" decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosCampeonatoNacional" />
+							<f:ajax event="blur" render="messageJogosCampeonatoNacional" />
+						</p:inputNumber>
+
+						<p:message for="jogosCampeonatoNacional"
+							id="messageJogosCampeonatoNacional" />
+
+						<p:outputLabel value="Copa Nacional:" />
+
+						<p:inputNumber id="jogosCopaNacional" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosCopaNacional}" type="int"
+							decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosCopaNacional" />
+							<f:ajax event="blur" render="messageJogosCopaNacional" />
+						</p:inputNumber>
+
+						<p:message for="jogosCopaNacional" id="messageJogosCopaNacional" />
+
+						<p:outputLabel value="Supercopa Nacional:" />
+
+						<p:inputNumber id="jogosSupercopaNacional" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosSupercopaNacional}"
+							type="int" decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosSupercopaNacional" />
+							<f:ajax event="blur" render="messageJogosSupercopaNacional" />
+						</p:inputNumber>
+
+						<p:message for="jogosSupercopaNacional"
+							id="messageJogosSupercopaNacional" />
+
+						<p:outputLabel value="Copa Secundária:" />
+
+						<p:inputNumber id="jogosCopaSecundaria" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosCopaSecundaria}" type="int"
+							decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosCopaSecundaria" />
+							<f:ajax event="blur" render="messageJogosCopaSecundaria" />
+						</p:inputNumber>
+
+						<p:message for="jogosCopaSecundaria"
+							id="messageJogosCopaSecundaria" />
+
+						<p:outputLabel value="Campeonato Estadual:" />
+
+						<p:inputNumber id="jogosCampeonatoEstadual" required="true"
+							requiredMessage="Número mínimo: 0 jogos"
+							value="#{temporadaBean.temporada.jogosCampeonatoEstadual}"
+							type="int" decimalPlaces="0" min="0"
+							validatorMessage="Não pode ser negativo">
+							<f:validateLongRange minimum="0" />
+							<p:message for="messageJogosCampeonatoEstadual" />
+							<f:ajax event="blur" render="messageJogosCampeonatoEstadual" />
+						</p:inputNumber>
+
+						<p:message for="jogosCampeonatoEstadual"
+							id="messageJogosCampeonatoEstadual" />
+					</p:panelGrid>
+
+					<p:tooltip for="jogosCopaIntercontinental"
+						value="Exemplos: Mundial de Clubes e Copa Intercontinental" />
+					<p:tooltip for="jogosCopaContinental"
+						value="Exemplos: Copa Libertadores e Liga dos Campeões" />
+					<p:tooltip for="jogosSupercopaContinental"
+						value="Exemplos: Recopa Sul-Americana e Supercopa Europeia" />
+					<p:tooltip for="jogosCampeonatoNacional"
+						value="Exemplos: Campeonato Brasileiro e Premier League" />
+					<p:tooltip for="jogosCopaNacional"
+						value="Exemplos: Copa do Brasil e Copa da Inglaterra" />
+					<p:tooltip for="jogosSupercopaNacional"
+						value="Exemplos: Suppercopa do Brasil e Supercopa da Inglaterra" />
+					<p:tooltip for="jogosCopaSecundaria"
+						value="Exemplos: Copa do Nordeste e Copa da Liga Inglesa" />
+					<p:tooltip for="jogosCampeonatoEstadual"
+						value="Exemplos: Campeonato Mineiro e Campeonato Paulista" />
+				</p:fieldset>
+			</p:fieldset>
+
+			<br />
+			<p:commandButton value="Gravar" action="#{temporadaBean.gravar}"
+				process="@form"
+				update="@form :formTabelaTemporadas:tabelaTemporadas :growlForm:messages">
+				<p:confirm header="Confirmação" message="Confirmar gravação?"
+					icon="pi pi-exclamation-triangle" />
+			</p:commandButton>
+			<p:commandButton value="Limpar" action="#{temporadaBean.limpar}"
+				update="formTemporada" process="@this">
+				<p:confirm header="Confirmação" message="Limpar todos os campos?"
+					icon="pi pi-exclamation-triangle" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				responsive="true" width="300">
+				<p:panelGrid columns="2" style="text-align: center;">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no ui-button-flat" />
+				</p:panelGrid>
+			</p:confirmDialog>
+
+			<br />
+			<br />
+		</h:form>
+
+		<h:form id="formTabelaTemporadas">
+			<p:fieldset>
+				<p:dataTable value="#{temporadaBean.temporadas}" var="temporada"
+					id="tabelaTemporadas" paginator="true" rows="20">
+
+					<p:column headerText="Temporada" sortBy="#{temporada.temporada}"
+						filterBy="#{temporada.temporada}" filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.temporada}" />
+					</p:column>
+
+					<p:column headerText="Clube" sortBy="#{temporada.clube.nome}"
+						filterBy="#{temporada.clube.nome}" filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.clube.nome}" />
+					</p:column>
+
+					<p:column headerText="Categoria"
+						sortBy="#{temporada.clube.categoria}"
+						filterBy="#{temporada.clube.categoria}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.clube.categoria}" />
+					</p:column>
+
+					<p:column headerText="Divisão Nacional"
+						sortBy="#{temporada.divisaoNacional}"
+						filterBy="#{temporada.divisaoNacional}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.divisaoNacional}" />
+					</p:column>
+
+					<p:column headerText="Duração (em Dias)"
+						sortBy="#{temporada.duracaoPeriodoDeAtividades}"
+						filterBy="#{temporada.duracaoPeriodoDeAtividades}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.duracaoPeriodoDeAtividades}" />
+					</p:column>
+
+					<p:column headerText="Intervalo Anterior (em Dias)"
+						sortBy="#{temporada.intervaloPeriodoDeAtividades}"
+						filterBy="#{temporada.intervaloPeriodoDeAtividades}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.intervaloPeriodoDeAtividades}" />
+					</p:column>
+
+					<p:column headerText="Número Total de Jogos"
+						sortBy="#{temporada.numeroTotaldeJogos}"
+						filterBy="#{temporada.numeroTotaldeJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.numeroTotaldeJogos}" />
+					</p:column>
+
+					<p:column headerText="Intervalo Bruto entre Jogos"
+						sortBy="#{temporada.intervaloBrutoEntreJogos}"
+						filterBy="#{temporada.intervaloBrutoEntreJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.intervaloBrutoEntreJogos}" />
+					</p:column>
+
+					<p:column headerText="Intervalo Líquido entre Jogos"
+						sortBy="#{temporada.intervaloLiquidoEntreJogos}"
+						filterBy="#{temporada.intervaloLiquidoEntreJogos}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{temporada.intervaloLiquidoEntreJogos}" />
+					</p:column>
+
+					<p:column headerText="Editar" style="text-align: center;">
+						<p:commandLink action="#{temporadaBean.carregar(temporada)}"
+							update=":formTemporada :growlForm:messages"
+							onclick="window.scrollTo(0, 0);">
+							<span class="pi-icon pi pi-pencil" style="margin: 0 auto;" />
+						</p:commandLink>
+					</p:column>
+
+					<p:column headerText="Excluir" style="text-align: center;">
+						<p:commandLink action="#{temporadaBean.remover(temporada)}"
+							update="@form :formTemporada :growlForm:messages">
+							<span class="pi-icon pi pi-trash" style="margin: 0 auto;" />
+						</p:commandLink>
+					</p:column>
+
+				</p:dataTable>
+			</p:fieldset>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

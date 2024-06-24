@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="pageTitle">
+        Página de Informações sobre o Projeto
+    </ui:define>
+
+	<ui:define name="titulo">
+		<!-- <p:outputPanel>Página de Informações sobre o Projeto</p:outputPanel> -->
+		
+		
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<p:fieldset legend="Projeto Social">
+			<p:outputLabel styleClass="pi pi-users"
+				style="display: inline-block; width: 100%; text-align: justify;"
+				value="  Este projeto tem como objetivo um melhor entendimento do cenário dos Clubes de Futebol Masculino
+				em todas as regiões e divisões do Brasil, buscando assim propor melhorias para que o País do Futebol faça
+				jus à sua fama e proporcione um ciclo de atividades adequado para a maior parte das equipes. Este processo
+				será dividido em algumas fases que serão apresentadas a seguir." />
+				
+		</p:fieldset>
+
+		<br />
+
+		<p:fieldset legend="Fase de Captação">
+
+			<p:outputLabel styleClass="pi pi-sitemap"
+				style="display: inline-block; width: 100%; text-align: justify;"
+				value="  Nesta etapa serão coletados os dados referentes a diversos Clubes de Futebol Masculino do Brasil e suas temporadas.
+					Além disso, serão armazenadas informações sobre as competições, como regulamento e número de competidores, e
+					sobre os Sistemas de Ligas, como número de divisões e participantes, número mínimo e máximo de jogos por competidor." />
+
+		</p:fieldset>
+
+		<br />
+
+		<p:fieldset legend="Fase de Análise">
+
+			<p:outputLabel styleClass="pi pi-chart-line"
+				style="display: inline-block; width: 100%; text-align: justify;"
+				value="  A análise das temporadas dos clubes será feita primeiramente ao categorizar os o número de jogos disputados, e em seguida
+					calculando intervalos entre datas de início e fim da temporada atual e anterior. Os sistemas de ligas serão avaliados de acordo com
+					seu escopo regional, número máximo e mínimo de competidores e jogos por divisão. Após isso, para cada temporada serão calculadas as
+					variáveis Número Total de Jogos Disputados, Duração do Período de Atividade, Duração entre Períodos de Atividades, Intervalo Bruto e
+					Intervalo Líquido, juntamente com a média de cada uma delas para os clubes." />
+
+		</p:fieldset>
+
+		<br />
+
+		<p:fieldset legend="Fase de Desenvolvimento">
+
+			<p:outputLabel styleClass="pi pi-th-large"
+				style="display: inline-block; width: 100%; text-align: justify;"
+				value="  Desenvolver um sistema interativo que seja capaz de expor todas estas informações para o público e entidades que tenham interesse em melhorar
+					as condições de trabalho e de ciclo de atividades para clubes e atletas." />
+
+		</p:fieldset>
+
+		<br />
+
+		<p:fieldset legend="Fase de Apresentação de Resultados">
+
+			<p:outputLabel styleClass="pi pi-check-square"
+				style="display: inline-block; width: 100%; text-align: justify;"
+				value="  Apresentar todos os dados e informações que foram obtidos, juntamente com recursos visuais de modo que possa ser feita uma melhor apresentação e
+					comparação entre a realidade do futebol brasileiro e europeu, mostrando assim alguns exemplos e casos possíveis que podem ocorrer com estas equipes.
+					Juntamente disso, serão apresentadas propostas para tentar reduzir esta diferença entre as realidades, como alterar formatos de regulamentos, o calendário
+					de jogos e o Sistema de Ligas." />
+
+		</p:fieldset>
+
+	</ui:define>
+</ui:composition>
+</html>

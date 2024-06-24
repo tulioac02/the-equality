@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+    <ui:define name="pageTitle">
+        Página de Notícias
+    </ui:define>
+
+    <ui:define name="titulo">
+        <!-- <p:outputPanel>Página de Notícias</p:outputPanel> -->
+    </ui:define>
+
+    <ui:define name="conteudo">
+
+        <h:form>
+            <p:dataScroller value="#{noticiaBean.noticias}" var="noticia"
+                            chunkSize="1" mode="inline" scrollHeight="780" lazy="false">
+                <f:facet name="header">
+                    Role para mais Notícias
+                </f:facet>
+
+                <ui:repeat value="#{noticiaBean.noticias}" var="noticiaItem">
+                    <div class="noticia">
+                        <div class="imagem">
+                            <p:graphicImage library="images/noticias" name="#{noticiaItem.imagem}" alt="Imagem da Notícia" />
+                        </div>
+                        <div class="texto">
+                            <h3>#{noticiaItem.titulo}</h3>
+                            <p>#{noticiaItem.descricao}</p>
+                            <a href="#{noticiaItem.link}" target="_blank">Ver mais</a>
+                        </div>
+                    </div>
+                </ui:repeat>
+
+            </p:dataScroller>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>

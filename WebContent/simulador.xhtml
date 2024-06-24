@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+
+	<ui:define name="pageTitle">
+        Página de Simulador de Temporadas
+    </ui:define>
+
+	<ui:define name="titulo">
+		<!-- <p:outputPanel>Página da simulador</p:outputPanel> -->
+	</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h:form id="formDados">
+
+			<p:fieldset legend="Datas e Dias de Desconto">
+
+				<p:panelGrid columns="3">
+
+					<p:outputLabel value="Data do Primeiro Jogo da Temporada Atual:" />
+
+					<p:calendar id="dataPrimeiroJogoAtual"
+						value="#{simuladorBean.dataPrimeiroJogoAtual}" required="true"
+						pattern="dd/MM/yyyy" mask="true"
+						requiredMessage="Data do Primeiro Jogo Temporada Atual é obrigatória"
+						validator="#{simuladorBean.validaDataPrimeiroJogoAtual}"
+						converterMessage="Preenchimento incompleto da Data">
+						<f:ajax event="blur" render="messageDataPrimeiroJogoAtual" />
+					</p:calendar>
+
+					<p:message for="dataPrimeiroJogoAtual"
+						id="messageDataPrimeiroJogoAtual" />
+
+					<p:outputLabel value="Data do Último Jogo da Temporada Atual:" />
+
+					<p:calendar id="dataUltimoJogoAtual"
+						value="#{simuladorBean.dataUltimoJogoAtual}" required="true"
+						pattern="dd/MM/yyyy" mask="true"
+						requiredMessage="Data do Último Jogo da Temporada Atual é obrigatória"
+						validator="#{simuladorBean.validaDataUltimoJogoAtual}"
+						converterMessage="Preenchimento incompleto da Data">
+						<f:ajax event="blur" render="messageDataUltimoJogoAtual" />
+					</p:calendar>
+
+					<p:message for="dataUltimoJogoAtual"
+						id="messageDataUltimoJogoAtual" />
+
+					<p:outputLabel value="Data do Último Jogo da Temporada Anterior:" />
+
+					<p:calendar id="dataUltimoJogoAnterior"
+						value="#{simuladorBean.dataUltimoJogoAnterior}"
+						pattern="dd/MM/yyyy" mask="true"
+						validator="#{simuladorBean.validaDataUltimoJogoAnterior}"
+						converterMessage="Preenchimento incompleto da Data">
+						<f:ajax event="blur" render="messageDataUltimoJogoAnterior" />
+					</p:calendar>
+
+					<p:message for="dataUltimoJogoAnterior"
+						id="messageDataUltimoJogoAnterior" />
+
+					<p:outputLabel value="Dias de Desconto" />
+
+					<p:inputNumber id="diasDeDesconto"
+						value="#{simuladorBean.diasDeDesconto}" min="0" max="100"
+						validatorMessage="O valor deve estar entre 0 e 100">
+						<f:validateLongRange minimum="0" maximum="100" />
+						<p:message for="diasDeDesconto" />
+						<f:ajax event="blur" render="messageDiasDeDesconto" />
+					</p:inputNumber>
+
+					<p:message for="diasDeDesconto" id="messageDiasDeDesconto" />
+
+				</p:panelGrid>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:tooltip for="dataPrimeiroJogoAtual"
+				value="Insira a data do primeiro jogo da temporada atual" />
+			<p:tooltip for="dataUltimoJogoAtual"
+				value="Insira a data do ultimo jogo da temporada atual" />
+			<p:tooltip for="dataUltimoJogoAnterior"
+				value="Insira a data da último jogo da temporada anterior" />
+			<p:tooltip for="diasDeDesconto"
+				value="Insira o número de dias de desconto, tais como Datas FIFA e recessos durante a temporada" />
+
+			<p:fieldset legend="Número de Jogos por Competições">
+				<p:panelGrid columns="6">
+
+					<p:outputLabel value="Copa Intercontinental:" />
+
+					<p:inputNumber id="jogosCopaIntercontinental"
+						value="#{simuladorBean.jogosCopaIntercontinental}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosCopaIntercontinental" />
+						<f:ajax event="blur" render="messageJogosCopaIntercontinental" />
+					</p:inputNumber>
+
+					<p:message for="jogosCopaIntercontinental"
+						id="messageJogosCopaIntercontinental" />
+
+					<p:outputLabel value="Copa Continental:" />
+
+					<p:inputNumber id="jogosCopaContinental"
+						value="#{simuladorBean.jogosCopaContinental}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosCopaContinental" />
+						<f:ajax event="blur" render="messageJogosCopaContinental" />
+					</p:inputNumber>
+
+					<p:message for="jogosCopaContinental"
+						id="messageJogosCopaContinental" />
+
+					<p:outputLabel value="Supercopa Continental:" />
+
+					<p:inputNumber id="jogosSupercopaContinental"
+						value="#{simuladorBean.jogosSupercopaContinental}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosSupercopaContinental" />
+						<f:ajax event="blur" render="messageJogosSupercopaContinental" />
+					</p:inputNumber>
+
+					<p:message for="jogosSupercopaContinental"
+						id="messageJogosSupercopaContinental" />
+
+					<p:outputLabel value="Campeonato Nacional:" />
+
+					<p:inputNumber id="jogosCampeonatoNacional"
+						value="#{simuladorBean.jogosCampeonatoNacional}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosCampeonatoNacional" />
+						<f:ajax event="blur" render="messageJogosCampeonatoNacional" />
+					</p:inputNumber>
+
+					<p:message for="jogosCampeonatoNacional"
+						id="messageJogosCampeonatoNacional" />
+
+					<p:outputLabel value="Copa Nacional:" />
+
+					<p:inputNumber id="jogosCopaNacional"
+						value="#{simuladorBean.jogosCopaNacional}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosCopaNacional" />
+						<f:ajax event="blur" render="messageJogosCopaNacional" />
+					</p:inputNumber>
+
+					<p:message for="jogosCopaNacional" id="messageJogosCopaNacional" />
+
+					<p:outputLabel value="Supercopa Nacional:" />
+
+					<p:inputNumber id="jogosSupercopaNacional"
+						value="#{simuladorBean.jogosSupercopaNacional}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosSupercopaNacional" />
+						<f:ajax event="blur" render="messageJogosSupercopaNacional" />
+					</p:inputNumber>
+
+					<p:message for="jogosSupercopaNacional"
+						id="messageJogosSupercopaNacional" />
+
+					<p:outputLabel value="Copa Secundária:" />
+
+					<p:inputNumber id="jogosCopaSecundaria"
+						value="#{simuladorBean.jogosCopaSecundaria}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosCopaSecundaria" />
+						<f:ajax event="blur" render="messageJogosCopaSecundaria" />
+					</p:inputNumber>
+
+					<p:message for="jogosCopaSecundaria"
+						id="messageJogosCopaSecundaria" />
+
+					<p:outputLabel value="Campeonato Estadual:" />
+
+					<p:inputNumber id="jogosCampeonatoEstadual"
+						value="#{simuladorBean.jogosCampeonatoEstadual}" min="0"
+						validatorMessage="Não pode ser negativo">
+						<f:validateLongRange minimum="0" />
+						<p:message for="messageJogosCampeonatoEstadual" />
+						<f:ajax event="blur" render="messageJogosCampeonatoEstadual" />
+					</p:inputNumber>
+
+					<p:message for="jogosCampeonatoEstadual"
+						id="messageJogosCampeonatoEstadual" />
+
+				</p:panelGrid>
+
+			</p:fieldset>
+
+			<br />
+
+			<p:commandButton value="Calcular" action="#{simuladorBean.calcular}"
+				update=":formResultados :growlForm:messages"
+				process="@this :formDados">
+			</p:commandButton>
+
+			<p:commandButton value="Limpar" action="#{simuladorBean.limpar}"
+				update=":formDados :formResultados" process="@this">
+				<p:confirm header="Confirmação" message="Limpar todos os campos?"
+					icon="pi pi-exclamation-triangle" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				responsive="true" width="300">
+				<p:panelGrid columns="2" style="text-align: center;">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no ui-button-flat" />
+				</p:panelGrid>
+			</p:confirmDialog>
+
+		</h:form>
+
+		<br />
+
+		<br />
+
+		<h:form id="formResultados">
+			<p:fieldset legend="Resultados">
+				<p:panelGrid columns="3">
+
+					<p:outputLabel value="Duração do Período de Atividades (em dias):" />
+
+					<p:inputText id="duracaoPeriodoDeAtividades"
+						value="#{simuladorBean.duracaoPeriodoDeAtividades}"
+						readonly="true" />
+
+					<p:outputLabel
+						value="#{simuladorBean.notacaoDuracaoPeriodoDeAtividades}" />
+
+					<p:outputLabel
+						value="Intervalo entre Períodos de Atividades (em dias):" />
+
+					<p:inputText id="intervaloPeriodoDeAtividades"
+						value="#{simuladorBean.intervaloPeriodoDeAtividades}"
+						readonly="true" />
+
+					<p:outputLabel
+						value="#{simuladorBean.notacaoIntervaloPeriodoDeAtividades}" />
+
+					<p:outputLabel value="Número Total de Jogos:" />
+
+					<p:inputText id="numeroTotalDeJogos"
+						value="#{simuladorBean.numeroTotalDeJogos}" readonly="true" />
+
+					<p:outputLabel value="#{simuladorBean.notacaoNumeroTotalDeJogos}" />
+
+					<p:outputLabel value="Intervalo Bruto entre Jogos (em dias):" />
+
+					<p:inputText id="intervaloBrutoEntreJogos"
+						value="#{simuladorBean.intervaloBrutoEntreJogos}" readonly="true" />
+
+					<p:outputLabel
+						value="#{simuladorBean.notacaoIntervaloBrutoEntreJogos}" />
+
+					<p:outputLabel value="Intervalo Líquido entre Jogos (em dias):" />
+
+					<p:inputText id="intervaloLiquidoEntreJogos"
+						value="#{simuladorBean.intervaloLiquidoEntreJogos}"
+						readonly="true" />
+
+					<p:outputLabel
+						value="#{simuladorBean.notacaoIntervaloLiquidoEntreJogos}" />
+
+				</p:panelGrid>
+
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>
